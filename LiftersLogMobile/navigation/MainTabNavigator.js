@@ -1,15 +1,17 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 import { Button, Header } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import TabBarIcon from '../components/TabBarIcon'
+import HomeScreen from '../screens/HomeScreen'
+import LinksScreen from '../screens/LinksScreen'
 import PercentageFinderScreen from '../screens/PercentageFinder'
 import PlateMathScreen from '../screens/PlateMath'
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen'
+import Settings from '../screens/Settings'
+import UserSession from '../screens/UserSession'
 
 const config = Platform.select({
   web: { headerMode: 'float' },
@@ -39,7 +41,7 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksBackButton = (props) => {
+const BackButton = (props) => {
   return (
     <Button
       type="clear"
@@ -66,7 +68,7 @@ const LinksStack = createStackNavigator(
           <Header
             backgroundColor='#626263'
             centerComponent={{ text: 'Percentage Finder', style: { color: '#fff' } }}
-            leftComponent={ <LinksBackButton nav={ navigation } /> }
+            leftComponent={ <BackButton nav={ navigation } /> }
           />
       })
     },
@@ -77,7 +79,7 @@ const LinksStack = createStackNavigator(
           <Header
             backgroundColor='#626263'
             centerComponent={{ text: 'Plate Math', style: { color: '#fff' } }}
-            leftComponent={ <LinksBackButton nav={ navigation } /> }
+            leftComponent={ <BackButton nav={ navigation } /> }
           />
       })
     }
@@ -94,27 +96,47 @@ LinksStack.navigationOptions = {
 
 LinksStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const ProfileStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Profile: ProfileScreen,
+    Session: {
+      screen: UserSession,
+      navigationOptions: ({ navigation }) => ({
+        header:
+          <Header
+            backgroundColor='#626263'
+            leftComponent={ <BackButton nav={ navigation } /> }
+          />
+      })
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        header:
+          <Header
+            backgroundColor='#626263'
+            leftComponent={ <BackButton nav={ navigation } /> }
+          />
+      })
+    }
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+ProfileStack.path = '';
 
 const tabNavigator = createBottomTabNavigator(
   {
     HomeStack,
     LinksStack,
-    SettingsStack,
+    ProfileStack,
   },
   {
     tabBarOptions: {

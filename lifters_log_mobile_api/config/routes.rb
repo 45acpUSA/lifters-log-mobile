@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :olympic_lifts
-  resources :core_lifts
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  get '*path', :to => 'core_lifts#root', constraints: -> (request){ request.format.html? }
+
+  resources :users do
+    resources :core_lifts
+    resources :olympic_lifts
+  end
+
+  root :to => 'welcome#index'
 end

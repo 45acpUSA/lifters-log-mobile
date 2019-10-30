@@ -1,9 +1,9 @@
-import React from 'react';
-import { ScrollView, View, Image, Text, StyleSheet } from 'react-native';
+import React from 'react'
+import { ScrollView, View, Image, Text, StyleSheet } from 'react-native'
 import TouchableOpacity from 'react-native-platform-touchable'
 import { Header, Divider } from 'react-native-elements'
 
-export default function LinksScreen(props) {
+export default function ProfileScreen(props) {
   const { navigate } = props.navigation
   return (
     <ScrollView style={ styles.container }>
@@ -11,17 +11,12 @@ export default function LinksScreen(props) {
       <View>
         <TouchableOpacity
           style={ styles.options }
-          onPress={() => navigate('PercentageFinder')}
+          onPress={() => navigate('Session')}
           >
           <View style={ styles.optionTextContainer }>
-            <Text style={ styles.optionText }>Percentage Finder</Text>
+            <Text style={ styles.optionText }>Sign In</Text>
           </View>
         </TouchableOpacity>
-        <View style={ styles.optionDescriptionContainer }>
-          <Text style={ styles.optionDescription }>
-            Percentage Finder allows you to quickly see your weight breakdown between the percentage range you provide so you can focus more on training and less on calculating.
-          </Text>
-        </View>
       </View>
 
       <Divider style={ styles.divider } />
@@ -29,31 +24,21 @@ export default function LinksScreen(props) {
       <View>
         <TouchableOpacity
           style={ styles.options }
-          onPress={() => navigate('PlateMath')}
+          onPress={() => navigate('Settings')}
         >
           <View style={ styles.optionTextContainer }>
-            <Text style={ styles.optionText }>Plate Math</Text>
+            <Text style={ styles.optionText }>Settings</Text>
           </View>
         </TouchableOpacity>
-        <View style={ styles.optionDescriptionContainer }>
-          <Text style={ styles.optionDescription }>
-            Having trouble adding up all the tens you threw on your bar? What about those random change plates? Click on the link, follow the instructions and let us add your weights for you.
-          </Text>
-        </View>
       </View>
 
     </ScrollView>
   )
 }
 
-LinksScreen.navigationOptions = {
-  header: 
-    <Header
-      backgroundColor='#626263'
-      centerComponent={{ text: 'Mathematical', style: { color: '#fff' } }}
-    />,
-  
-};
+ProfileScreen.navigationOptions = {
+  title: 'Profile',
+}
 
 const styles = StyleSheet.create({
   container: {
