@@ -1,6 +1,15 @@
 import React from 'react'
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
+import {
+  AsyncStorage,
+  AlertIOS,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text
+} from 'react-native'
 import t from 'tcomb-form-native'
+
+import SignUp from './SignUp'
 
 import { BASE } from '../api/credentials'
 
@@ -40,6 +49,10 @@ export default class UserSession extends React.Component {
     } catch (error) {
       console.log('AsyncStorage error: ' + error.message)
     }
+  }
+
+  _userSignUp = () => {
+
   }
 
   handleSignIn = () => {
@@ -103,6 +116,7 @@ export default class UserSession extends React.Component {
   // }
 
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={ styles.container }>
         <Form
@@ -116,6 +130,13 @@ export default class UserSession extends React.Component {
           underlayColor='#99d9f4'
         >
           <Text style={ styles.buttonText }>Sign In</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={ styles.button }
+          onPress={() => navigate('SignUp') }
+          underlayColor='#99d9f4'
+        >
+          <Text style={ styles.buttonText }>Sign Up</Text>
         </TouchableOpacity>
       </View>
     )

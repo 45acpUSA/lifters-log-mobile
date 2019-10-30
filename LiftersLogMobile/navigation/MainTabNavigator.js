@@ -11,6 +11,7 @@ import PercentageFinderScreen from '../screens/PercentageFinder'
 import PlateMathScreen from '../screens/PlateMath'
 import ProfileScreen from '../screens/ProfileScreen'
 import Settings from '../screens/Settings'
+import SignUp from '../screens/SignUp'
 import UserSession from '../screens/UserSession'
 
 const config = Platform.select({
@@ -101,6 +102,16 @@ const ProfileStack = createStackNavigator(
     Profile: ProfileScreen,
     Session: {
       screen: UserSession,
+      navigationOptions: ({ navigation }) => ({
+        header:
+          <Header
+            backgroundColor='#626263'
+            leftComponent={ <BackButton nav={ navigation } /> }
+          />
+      })
+    },
+    SignUp: {
+      screen: SignUp,
       navigationOptions: ({ navigation }) => ({
         header:
           <Header
