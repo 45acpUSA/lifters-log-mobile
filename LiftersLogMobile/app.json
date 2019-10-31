@@ -23,9 +23,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "LiftersLogMobilex",
+      "publishBundlePath": "ios/lifter-s-log/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/lifter-s-log/Supporting/shell-app-manifest.json"
     },
     "description": "Lifter's Log (no auth) is currently a front-end-only, cross-platform mobile application. The main features are Percentage Finder and Plate Math; each respectively tackles two common problems across a majority of weightlifting disciplines. Percentage Finder solves the issue of calculating the training weights at specific percentages of your one rep max, eliminating the need for any calculations. Plate Math handles the situation of unknown weight on the bar which can result from building up to a new PR or a non-percentage based build. Please read the text on the Home Screen and leave comments or feedback at the provided email link (it's also a mailto link).  I will make improvements based on these comments, while working to integrate authentication in so users can log in and save their PR's, while being able to get your percentages based on these PR's.",
-    "githubUrl": "https://github.com/45acpUSA/lifters-log-mobile-no-auth"
+    "githubUrl": "https://github.com/45acpUSA/lifters-log-mobile-no-auth",
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.13.0-sdk35.0.0-a30ebc9b-3db4-42f4-b677-e468076baf18.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.13.0-sdk35.0.0-b816b7af-88da-4ca9-87a5-7438f0c21b6e.tar.gz"
+    },
+    "scheme": "exp2686872af9564837a8054419e1d1469f",
+    "android": {
+      "package": "lifters.log.mobilex",
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    }
   }
 }
