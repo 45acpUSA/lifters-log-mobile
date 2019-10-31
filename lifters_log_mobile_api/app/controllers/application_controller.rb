@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  acts_as_token_authentication_handler_for User
+  acts_as_token_authentication_handler_for :users
 
   before_action :configure_permitted_parameters, if: :devise_controller?
     

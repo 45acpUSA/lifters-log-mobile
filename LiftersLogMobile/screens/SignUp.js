@@ -8,6 +8,7 @@ import {
   Text
 } from 'react-native'
 import t from 'tcomb-form-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { BASE } from '../api/credentials'
 
@@ -28,21 +29,60 @@ const Attributes = t.struct({
   location: Location,
 })
 
+let STORAGE_KEY = 'authentication_token'
+
 export default class SignUp extends React.Component {
+
+  async _onValueChange(item, selectedValue) {
+    try {
+      await AsyncStorage.setItem(item, selectedValue);
+    } catch (error) {
+      console.log('AsyncStorage error: ' + error.message);
+    }
+  }
+
+  _userSignUp = () => {
+    let value = this.refs.signUpForm.getValue()
+    if (value) {
+      fetch(BASE.users, {
+        method: "POST",
+        headers: BASE.headers,
+        body: JSON.stringify({
+          email: value.email,
+          password: value.password,
+          first_name: value.first_name,
+          last_name: value.last_name,
+          affiliate: value.affiliate,
+          location: value.location,
+        })
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        this._onValueChange(STORAGE_KEY, data.authentication_token),
+        AlertIOS.alert(
+          "Signup Success!"
+        )
+      })
+      .done()
+    }
+  }
+
   render() {
     return (
       <View style={ styles.container }>
-        <Form
-          ref="signUpForm"
-          type={ Attributes }
-        />
-        <TouchableOpacity
-          style={ styles.button }
-          onPress={ this.handleSignIn }
-          underlayColor='#99d9f4'
-        >
-          <Text style={ styles.buttonText }>Save</Text>
-        </TouchableOpacity>
+        <KeyboardAwareScrollView>
+          <Form
+            ref="signUpForm"
+            type={ Attributes }
+          />
+          <TouchableOpacity
+            style={ styles.button }
+            onPress={ this._userSignUp }
+            underlayColor='#99d9f4'
+          >
+            <Text style={ styles.buttonText }>Save</Text>
+          </TouchableOpacity>
+        </KeyboardAwareScrollView>
       </View>
     )
   }
